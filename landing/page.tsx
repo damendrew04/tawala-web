@@ -1,13 +1,14 @@
 "use client"
 
-
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { ChevronDown, Star, Users, Zap, Shield, ArrowRight, Play, Menu, X, Check } from 'lucide-react';
 
 const TawalaLanding = () => {
   const [scrollY, setScrollY] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -17,6 +18,7 @@ const TawalaLanding = () => {
 
   const pricingPlans = [
     {
+      id: 'bronze',
       name: 'Bronze',
       price: 'KES 1,000',
       period: '/month',
@@ -30,6 +32,7 @@ const TawalaLanding = () => {
       color: 'from-amber-400 to-orange-500'
     },
     {
+      id: 'silver',
       name: 'Silver',
       price: 'KES 2,000',
       period: '/month',
@@ -45,6 +48,7 @@ const TawalaLanding = () => {
       popular: true
     },
     {
+      id: 'gold',
       name: 'Gold',
       price: 'KES 3,000',
       period: '/month',
@@ -86,6 +90,11 @@ const TawalaLanding = () => {
     }
   ];
 
+  // Navigate to payment page with selected plan
+  const handlePlanSelection = (planId: string) => {
+    router.push(`/payment?plan=${planId}`);
+  };
+
   // Helper function to get dynamic transform styles
   const getTransformStyle = (multiplier: number) => ({
     transform: `translateY(${scrollY * multiplier}px)`
@@ -106,35 +115,35 @@ const TawalaLanding = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-300 via-gray-50 to-black/25 text-gray-900 overflow-hidden">
       {/* Background Elements */}
-    <div className="fixed inset-0 overflow-hidden pointer-events-none">
-      <div 
-        className="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-to-l from-yellow-300/20 to-transparent rounded-full blur-3xl translate-y-[calc(var(--scrollY,0)*0.5px)]"
-        style={{ '--scrollY': `${scrollY}` } as React.CSSProperties}
-      />
-      <div 
-        className="absolute -bottom-1/2 -left-1/2 w-full h-full bg-gradient-to-r from-amber-300/20 to-transparent rounded-full blur-3xl translate-y-[calc(var(--scrollY,0)*-0.3px)]"
-        style={{ '--scrollY': `${scrollY}` } as React.CSSProperties}
-      />
-    </div>
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div
+          className="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-to-l from-yellow-300/20 to-transparent rounded-full blur-3xl translate-y-[calc(var(--scrollY,0)*0.5px)]"
+          style={{ '--scrollY': `${scrollY}` } as React.CSSProperties}
+        />
+        <div
+          className="absolute -bottom-1/2 -left-1/2 w-full h-full bg-gradient-to-r from-amber-300/20 to-transparent rounded-full blur-3xl translate-y-[calc(var(--scrollY,0)*-0.3px)]"
+          style={{ '--scrollY': `${scrollY}` } as React.CSSProperties}
+        />
+      </div>
 
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 transition-all duration-300">
-        <div 
+        <div
           className="backdrop-blur-md bg-white/90 border-b border-yellow-200"
           style={getNavbarStyle()}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center py-4">
               <div className="flex items-center space-x-2">
-                <div className="w-auto h-auto bg-gradient-to-r from-white to-gray-200 rounded-lg flex items-center justify-center transition-transform duration-300 hover:scale-150 ">
-                   <Image src="/ta.png" alt="Tawala Logo" width={104} height={104} className="h-auto w-auto object-contain" />
+                <div className="w-auto h-auto bg-gradient-to-r from-white to-gray-200 rounded-lg flex items-center justify-center transition-transform duration-300 hover:scale-150">
+                  <Image src="/ta.png" alt="Tawala Logo" width={104} height={104} className="h-auto w-auto object-contain" />
                 </div>
                 <span className="text-xl font-bold text-gray-900">Tawala App</span>
               </div>
-              
+             
               <div className="hidden md:flex space-x-8">
                 {['Home', 'Features', 'Pricing', 'About'].map((item) => (
-                  <a 
+                  <a
                     key={item}
                     href={`#${item.toLowerCase()}`}
                     className="hover:text-yellow-600 transition-colors duration-200 text-gray-700"
@@ -144,7 +153,7 @@ const TawalaLanding = () => {
                 ))}
               </div>
 
-              <button 
+              <button
                 className="md:hidden text-gray-700"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
               >
@@ -159,7 +168,7 @@ const TawalaLanding = () => {
           <div className="md:hidden backdrop-blur-md bg-white/90 border-b border-yellow-200">
             <div className="px-4 py-4 space-y-4">
               {['Home', 'Features', 'Pricing', 'About'].map((item) => (
-                <a 
+                <a
                   key={item}
                   href={`#${item.toLowerCase()}`}
                   className="block hover:text-yellow-600 transition-colors duration-200 text-gray-700"
@@ -176,7 +185,7 @@ const TawalaLanding = () => {
       {/* Hero Section */}
       <section id="home" className="relative min-h-screen flex items-center justify-center pt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div 
+          <div
             className="transform transition-all duration-1000"
             style={getHeroStyle()}
           >
@@ -186,7 +195,7 @@ const TawalaLanding = () => {
             <p className="text-xl md:text-2xl mb-8 text-gray-700 max-w-3xl mx-auto">
               Revolutionizing Kenya&#39;s gig economy by connecting professionals with clients in need of short-term services
             </p>
-            
+           
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
               <button className="group bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg text-white">
                 <div className="flex items-center space-x-2">
@@ -203,7 +212,7 @@ const TawalaLanding = () => {
             {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">
               {stats.map((stat, index) => (
-                <div 
+                <div
                   key={index}
                   className="backdrop-blur-md bg-white/80 rounded-xl p-6 border border-yellow-200 hover:bg-white/90 transition-all duration-300 transform hover:scale-105 shadow-lg animate-[fadeInUp_0.8s_ease-out_forwards]"
                   style={{ animationDelay: `${index * 0.1}s` }}
@@ -236,7 +245,7 @@ const TawalaLanding = () => {
 
           <div className="grid md:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <div 
+              <div
                 key={index}
                 className="backdrop-blur-md bg-white/80 rounded-2xl p-8 border border-yellow-200 hover:bg-white/90 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 shadow-lg"
                 style={{
@@ -269,11 +278,11 @@ const TawalaLanding = () => {
 
           <div className="grid md:grid-cols-3 gap-8">
             {pricingPlans.map((plan, index) => (
-              <div 
+              <div
                 key={index}
                 className={`relative backdrop-blur-md bg-white/80 rounded-2xl p-8 border transition-all duration-500 transform hover:scale-105 hover:-translate-y-4 shadow-lg ${
-                  plan.popular 
-                    ? 'border-yellow-400 bg-white/90 shadow-2xl shadow-yellow-500/25' 
+                  plan.popular
+                    ? 'border-yellow-400 bg-white/90 shadow-2xl shadow-yellow-500/25'
                     : 'border-yellow-200 hover:bg-white/90'
                 }`}
                 style={{
@@ -310,11 +319,14 @@ const TawalaLanding = () => {
                   ))}
                 </ul>
 
-                <button className={`w-full py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 ${
-                  plan.popular
-                    ? 'bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white'
-                    : 'border-2 border-yellow-400 hover:border-yellow-500 hover:bg-yellow-50 text-gray-700'
-                }`}>
+                <button
+                  className={`w-full py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 ${
+                    plan.popular
+                      ? 'bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white'
+                      : 'border-2 border-yellow-400 hover:border-yellow-500 hover:bg-yellow-50 text-gray-700'
+                  }`}
+                  onClick={() => handlePlanSelection(plan.id)}
+                >
                   Get Started
                 </button>
               </div>
@@ -372,7 +384,6 @@ const TawalaLanding = () => {
           <div className="text-center">
             <div className="flex items-center justify-center space-x-2 mb-4">
               <Image src="/ta.png" alt="Tawala Logo" width={104} height={104} className="h-auto w-auto object-contain" />
-
             </div>
             <span className="text-xl font-bold text-gray-900">Tawala</span>
             <p className="text-gray-600 mb-4">

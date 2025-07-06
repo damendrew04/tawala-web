@@ -1,4 +1,4 @@
-import TawalaLanding from '@/components/TawalaLanding'
+import TawalaLanding from '@/landing/page'
 
 export default function Home() {
   return <TawalaLanding />
