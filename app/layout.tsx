@@ -16,14 +16,14 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://tawala.vercel.app'),
+  metadataBase: new URL('https://tawala-web.vercel.app/'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://tawala.vercel.app',
+    url: 'https://tawala-web.vercel.app/',
     title: 'Tawala - Revolutionizing Kenya\'s Gig Economy',
     description: 'Connect with professionals for short-term services. Join Kenya\'s leading gig economy platform.',
     siteName: 'Tawala',
